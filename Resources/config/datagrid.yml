@@ -1,0 +1,339 @@
+datagrid:
+    physicalstore-accounts-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - physicalstore_accounts.id
+                    - physicalstore_accounts.custno
+                    - physicalstore_accounts.contact
+                    - physicalstore_accounts.city
+                    - physicalstore_accounts.country
+                    - physicalstore_accounts.phone
+                    - physicalstore_accounts.email
+                    - physicalstore_accounts.updated
+                from:
+                    - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
+        columns:
+            custno:
+                label: demacmedia_physicalstore.accounts.custno.label
+            contact:
+                label: demacmedia_physicalstore.accounts.contact.label
+            city:
+                label: demacmedia_physicalstore.accounts.city.label
+            country:
+                label: demacmedia_physicalstore.accounts.country.label
+            phone:
+                label: demacmedia_physicalstore.accounts.phone.label
+            email:
+                label: demacmedia_physicalstore.accounts.email.label
+            updated:
+                label: demacmedia_physicalstore.accounts.updated.label
+                frontend_type:    datetime
+
+        sorters:
+            columns:
+                country:
+                    data_name: physicalstore_accounts.country
+                city:
+                    data_name: physicalstore_accounts.city
+                contact:
+                    data_name: physicalstore_accounts.contact
+            default:
+                id: DESC
+
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      demacmedia_physicalstore_accounts_view
+                params:     [ custno ]
+
+        actions:
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                icon:          edit
+                link:          update_link
+            delete:
+                type:          navigate
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
+            view:
+                type:         navigate
+                label:        oro.grid.action.view
+                link:         view_link
+                icon:         eye-open
+                rowAction:    true
+
+        filters:
+            columns:
+                custno:
+                    type: string
+                    data_name: physicalstore_accounts.custno
+                contact:
+                    type: string
+                    data_name: physicalstore_accounts.contact
+                city:
+                    type: string
+                    data_name: physicalstore_accounts.city
+                phone:
+                    type: string
+                    data_name: physicalstore_accounts.phone
+                email:
+                    type: string
+                    data_name: physicalstore_accounts.email
+                    options:
+                        operator_choices:
+                            - 'is equal to'
+                            - 'is empty'
+                            - 'is not empty'
+                updated:
+                    type: datetime
+                    data_name: physicalstore_accounts.updated
+
+
+    # ORDERS FOR SPECIFIC ACCOUNT
+    ############################################################
+    physicalstore-orders-specific-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - physicalstore_orders.id
+                    - physicalstore_orders.invno
+                    - physicalstore_orders.custno
+                    - physicalstore_orders.invdate
+                    - physicalstore_orders.shipvia
+                    - physicalstore_orders.updated
+                    - physicalstore_orders.invamt
+                    - physicalstore_orders.taxrate
+                from:
+                    - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders, alias: physicalstore_orders }
+                where:
+                    and:
+                        - physicalstore_orders.custno = :custno_code
+            bind_parameters:
+                custno_code: custno
+
+        columns:
+            id:
+                label: demacmedia_physicalstore.orders.oroid.label
+            invamt:
+                label: demacmedia_physicalstore.orders.invamt.label
+                frontend_type: currency
+            taxrate:
+                label: demacmedia_physicalstore.orders.taxrate.label
+            invno:
+                label: demacmedia_physicalstore.orders.invno.label
+            custno:
+                label: demacmedia_physicalstore.orders.custno.label
+            invdate:
+                label: demacmedia_physicalstore.orders.invdate.label
+            shipvia:
+                label: demacmedia_physicalstore.orders.shipvia.label
+            updated:
+                label: demacmedia_physicalstore.orders.updated.label
+                frontend_type: datetime
+
+        sorters:
+            columns:
+                updated:
+                    data_name: physicalstore_orders.updated
+                custno:
+                    data_name: physicalstore_orders.custno
+            default:
+                id: DESC
+
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      demacmedia_physicalstore_orders_view
+                params:     [ invno ]
+
+        actions:
+            view:
+                type:         navigate
+                label:        oro.grid.action.view
+                link:         view_link
+                icon:         eye-open
+                rowAction:    true
+
+        filters:
+            columns:
+                invamt:
+                    type: currency
+                    data_name: physicalstore_orders.invamt
+                taxrate:
+                    type: percent
+                    data_name: physicalstore_orders.taxrate
+                invno:
+                    type: string
+                    data_name: physicalstore_orders.invno
+                shipvia:
+                    type: string
+                    data_name: physicalstore_orders.shipvia
+                updated:
+                    type: datetime
+                    data_name: physicalstore_orders.updated
+
+
+
+    # ORDERS
+    ############################################################
+    physicalstore-orders-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - physicalstore_orders.id
+                    - physicalstore_orders.invno
+                    - physicalstore_orders.custno
+                    - physicalstore_orders.invdate
+                    - physicalstore_orders.shipvia
+                    - physicalstore_orders.updated
+                    - physicalstore_orders.invamt
+                    - physicalstore_orders.taxrate
+                    - physicalstore_accounts.contact
+                from:
+                    - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders, alias: physicalstore_orders }
+                join:
+                    left:
+                        - { join: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
+                where:
+                    and:
+                        - physicalstore_accounts.custno = physicalstore_orders.custno
+
+        columns:
+            id:
+                label: demacmedia_physicalstore.orders.oroid.label
+            invamt:
+                label: demacmedia_physicalstore.orders.invamt.label
+                frontend_type: currency
+            taxrate:
+                label: demacmedia_physicalstore.orders.taxrate.label
+            invno:
+                label: demacmedia_physicalstore.orders.invno.label
+            contact:
+                label: demacmedia_physicalstore.accounts.contact.label
+            invdate:
+                label: demacmedia_physicalstore.orders.invdate.label
+            shipvia:
+                label: demacmedia_physicalstore.orders.shipvia.label
+            updated:
+                label: demacmedia_physicalstore.orders.updated.label
+                frontend_type: datetime
+
+        sorters:
+            columns:
+                updated:
+                    data_name: physicalstore_orders.updated
+                contact:
+                    data_name: physicalstore_accounts.contact
+            default:
+                id: DESC
+
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      demacmedia_physicalstore_orders_view
+                params:     [ invno ]
+
+        actions:
+            view:
+                type:         navigate
+                label:        oro.grid.action.view
+                link:         view_link
+                icon:         eye-open
+                rowAction:    true
+
+        filters:
+            columns:
+                contact:
+                    type: string
+                    data_name: physicalstore_accounts.contact
+                invamt:
+                    type: currency
+                    data_name: physicalstore_orders.invamt
+                taxrate:
+                    type: percent
+                    data_name: physicalstore_orders.taxrate
+                invno:
+                    type: string
+                    data_name: physicalstore_orders.invno
+                shipvia:
+                    type: string
+                    data_name: physicalstore_orders.shipvia
+                updated:
+                    type: datetime
+                    data_name: physicalstore_orders.updated
+
+
+    physicalstore-order-items-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - physicalstore_order_items.id
+                    - physicalstore_order_items.invno
+                    - physicalstore_order_items.custno
+                    - physicalstore_order_items.item
+                    - physicalstore_order_items.descrip
+                    - physicalstore_order_items.taxrate
+                    - physicalstore_order_items.cost
+                    - physicalstore_order_items.price
+                    - physicalstore_order_items.qtyord
+                    - physicalstore_order_items.invdate
+                    - physicalstore_order_items.updated
+                    - physicalstore_order_items.created
+                from:
+                    - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrderItems, alias: physicalstore_order_items }
+                where:
+                    and:
+                        - physicalstore_order_items.invno = :invno_code
+            bind_parameters:
+                invno_code: invno
+
+        columns:
+            id:
+                label: demacmedia_physicalstore.order_items.oroid.label
+            invno:
+                label: demacmedia_physicalstore.order_items.invno.label
+            item:
+                label: demacmedia_physicalstore.order_items.item.label
+            descrip:
+                label: demacmedia_physicalstore.order_items.descrip.label
+            cost:
+                label: demacmedia_physicalstore.order_items.cost.label
+                frontend_type: currency
+            price:
+                label: demacmedia_physicalstore.order_items.price.label
+                frontend_type: currency
+            qtyord:
+                label: demacmedia_physicalstore.order_items.qtyord.label
+            invdate:
+                label: demacmedia_physicalstore.order_items.invdate.label
+                frontend_type: datetime
+            updated:
+                label: demacmedia_physicalstore.order_items.updated.label
+                frontend_type: datetime
+
+        sorters:
+            columns:
+                updated:
+                    data_name: physicalstore_order_items.updated
+            default:
+                id: DESC
+
+        filters:
+            columns:
+                updated:
+                    type: datetime
+                    data_name: physicalstore_order_items.updated
+                item:
+                    type: string
+                    data_name: physicalstore_order_items.item
+

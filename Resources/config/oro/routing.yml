@@ -1,0 +1,117 @@
+demacmedia_physicalstore_accounts:
+    resource:   "@DemacMediaPhysicalStoreBundle/Controller/PhysicalStoreAccountsController.php"
+    type:       annotation
+    prefix:     /physicalstore/accounts
+
+demacmedia_physicalstore_orders:
+    resource:   "@DemacMediaPhysicalStoreBundle/Controller/PhysicalStoreOrdersController.php"
+    type:       annotation
+    prefix:     /physicalstore/orders
+
+demacmedia_physicalstore_orders_items:
+    resource:   "@DemacMediaPhysicalStoreBundle/Controller/PhysicalStoreOrderItemsController.php"
+    type:       annotation
+    prefix:     /physicalstore/orderitems
+
+#
+# REST actions for Physical Store Accounts
+# ----------------------------------------------------------------------------------------------------------------------
+demacmedia_api_physicalstore_get_accounts:
+    pattern: api/rest/{version}/physicalstore/accounts.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestAccounts:cget, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_create_account:
+    pattern: api/rest/{version}/physicalstore/accounts.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestAccounts:post, _format: json, version: latest }
+    requirements:
+        _method: POST
+
+demacmedia_api_physicalstore_get_account:
+    pattern: api/rest/{version}/physicalstore/accounts/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestAccounts:get, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_update_account:
+    pattern: api/rest/{version}/physicalstore/accounts/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestAccounts:put, _format: json, version: latest }
+    requirements:
+        _method: PUT
+
+demacmedia_api_physicalstore_delete_account:
+    pattern: api/rest/{version}/physicalstore/accounts/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestAccounts:delete, _format: json, version: latest }
+    requirements:
+        _method: DELETE
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+#
+# REST actions for Physical Store Orders
+# ----------------------------------------------------------------------------------------------------------------------
+demacmedia_api_physicalstore_get_orders:
+    pattern: api/rest/{version}/physicalstore/orders.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrders:cget, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_create_order:
+    pattern: api/rest/{version}/physicalstore/orders.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrders:post, _format: json, version: latest }
+    requirements:
+        _method: POST
+
+demacmedia_api_physicalstore_get_order:
+    pattern: api/rest/{version}/physicalstore/orders/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrders:get, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_update_order:
+    pattern: api/rest/{version}/physicalstore/orders/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrders:put, _format: json, version: latest }
+    requirements:
+        _method: PUT
+
+demacmedia_api_physicalstore_delete_order:
+    pattern: api/rest/{version}/physicalstore/orders/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrders:delete, _format: json, version: latest }
+    requirements:
+        _method: DELETE
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+#
+# REST actions for Physical Store Order Items
+# ----------------------------------------------------------------------------------------------------------------------
+demacmedia_api_physicalstore_get_ordersitems:
+    pattern: api/rest/{version}/physicalstore/orderitems.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrderItems:cget, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_create_orderitems:
+    pattern: api/rest/{version}/physicalstore/orderitems.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrderItems:post, _format: json, version: latest }
+    requirements:
+        _method: POST
+
+demacmedia_api_physicalstore_get_orderitems:
+    pattern: api/rest/{version}/physicalstore/orderitems/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrderItems:get, _format: json, version: latest }
+    requirements:
+        _method: GET
+
+demacmedia_api_physicalstore_update_orderitems:
+    pattern: api/rest/{version}/physicalstore/orderitems/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrderItems:put, _format: json, version: latest }
+    requirements:
+        _method: PUT
+
+demacmedia_api_physicalstore_delete_orderitems:
+    pattern: api/rest/{version}/physicalstore/orderitems/{id}.{_format}
+    defaults: { _controller: DemacMediaPhysicalStoreBundle:Api/Rest/PhysicalStoreRestOrderItems:delete, _format: json, version: latest }
+    requirements:
+        _method: DELETE

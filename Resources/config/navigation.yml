@@ -1,0 +1,21 @@
+oro_menu_config:
+   items:
+       physicalstore_tab:
+           label: 'In-store purchases'
+           uri: '#'
+ 
+       shortcut_accounts_item:
+           label: 'In-store Accounts'
+           route: demacmedia_physicalstore_accounts
+
+       shortcut_orders_item:
+           label: 'In-store Orders'
+           route: demacmedia_physicalstore_orders
+ 
+   tree:
+       application_menu:
+           children:
+               physicalstore_tab:
+                   children:
+                       shortcut_accounts_item: ~
+                       shortcut_orders_item: ~

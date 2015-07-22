@@ -1,0 +1,157 @@
+parameters:
+    demacmedia_physicalstore_accounts.form.type.accounts.class:         DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreAccountsType
+    demacmedia_physicalstore_accounts.form.type.accounts_api.class:     DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreAccountsApiType
+    demacmedia_physicalstore_accounts.form.handler.accounts.class:      DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreAccountsHandler
+    demacmedia_physicalstore_accounts.form.handler.accounts_api.class:  DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreAccountsApiHandler
+
+    demacmedia_physicalstore_orders.form.type.orders.class:         DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreOrdersType
+    demacmedia_physicalstore_orders.form.type.orders_api.class:     DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreOrdersApiType
+    demacmedia_physicalstore_orders.form.handler.orders.class:      DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreOrdersHandler
+    demacmedia_physicalstore_orders.form.handler.orders_api.class:  DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreOrdersApiHandler
+
+    demacmedia_physicalstore_orderitems.form.type.orderitems.class:         DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreOrderItemsType
+    demacmedia_physicalstore_orderitems.form.type.orderitems_api.class:     DemacMedia\Bundle\PhysicalStoreBundle\Form\Type\PhysicalStoreOrderItemsApiType
+    demacmedia_physicalstore_orderitems.form.handler.orderitems.class:      DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreOrderItemsHandler
+    demacmedia_physicalstore_orderitems.form.handler.orderitems_api.class:  DemacMedia\Bundle\PhysicalStoreBundle\Form\Handler\PhysicalStoreOrderItemsApiHandler
+
+services:
+    # ACCOUNTS
+    demacmedia_physicalstore_accounts.form.type.accounts:
+        class: %demacmedia_physicalstore_accounts.form.type.accounts.class%
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_accounts }
+
+    demacmedia_physicalstore_accounts.form.type.accounts_api:
+        class: %demacmedia_physicalstore_accounts.form.type.accounts_api.class%
+        arguments:
+            - @oro_entity_config.config_manager
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_accounts_api }
+
+    demacmedia_physicalstore_accounts.form.accounts:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'demacmedia_physicalstore_accounts'
+            - 'demacmedia_physicalstore_accounts'
+
+    demacmedia_physicalstore_accounts.form.accounts.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - ~
+            - 'demacmedia_physicalstore_accounts_api'
+
+    demacmedia_physicalstore_accounts.form.handler.accounts:
+        class: %demacmedia_physicalstore_accounts.form.handler.accounts.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_accounts.form.accounts
+            - @request
+            - @doctrine.orm.entity_manager
+
+    demacmedia_physicalstore_accounts.form.handler.accounts_api:
+        class: %demacmedia_physicalstore_accounts.form.handler.accounts_api.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_accounts.form.accounts.api
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity_config.config_manager
+
+
+
+    # ORDERS:
+    demacmedia_physicalstore_orders.form.type.orders:
+        class: %demacmedia_physicalstore_orders.form.type.orders.class%
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_orders }
+
+    demacmedia_physicalstore_orders.form.type.orders_api:
+        class: %demacmedia_physicalstore_orders.form.type.orders_api.class%
+        arguments:
+            - @oro_entity_config.config_manager
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_orders_api }
+
+    demacmedia_physicalstore_orders.form.orders:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'demacmedia_physicalstore_orders'
+            - 'demacmedia_physicalstore_orders'
+
+    demacmedia_physicalstore_orders.form.orders.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - ~
+            - 'demacmedia_physicalstore_orders_api'
+
+    demacmedia_physicalstore_orders.form.handler.orders:
+        class: %demacmedia_physicalstore_orders.form.handler.orders.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_orders.form.orders
+            - @request
+            - @doctrine.orm.entity_manager
+
+    demacmedia_physicalstore_orders.form.handler.orders_api:
+        class: %demacmedia_physicalstore_orders.form.handler.orders_api.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_orders.form.orders.api
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity_config.config_manager
+
+
+    # ORDERITEMS:
+    demacmedia_physicalstore_orderitems.form.type.orderitems:
+        class: %demacmedia_physicalstore_orderitems.form.type.orderitems.class%
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_orderitems }
+
+    demacmedia_physicalstore_orderitems.form.type.orderitems_api:
+        class: %demacmedia_physicalstore_orderitems.form.type.orderitems_api.class%
+        arguments:
+            - @oro_entity_config.config_manager
+        tags:
+            - { name: form.type, alias: demacmedia_physicalstore_orderitems_api }
+
+    demacmedia_physicalstore_orderitems.form.orderitems:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'demacmedia_physicalstore_orderitems'
+            - 'demacmedia_physicalstore_orderitems'
+
+    demacmedia_physicalstore_orderitems.form.orderitems.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - ~
+            - 'demacmedia_physicalstore_orderitems_api'
+
+    demacmedia_physicalstore_orderitems.form.handler.orderitems:
+        class: %demacmedia_physicalstore_orderitems.form.handler.orderitems.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_orderitems.form.orderitems
+            - @request
+            - @doctrine.orm.entity_manager
+
+    demacmedia_physicalstore_orderitems.form.handler.orderitems_api:
+        class: %demacmedia_physicalstore_orderitems.form.handler.orderitems_api.class%
+        scope: request
+        arguments:
+            - @demacmedia_physicalstore_orderitems.form.orderitems.api
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity_config.config_manager

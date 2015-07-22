@@ -1,0 +1,32 @@
+parameters:
+    demacmedia_physicalstore_accounts.entity.class:         DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreAccounts
+    demacmedia_physicalstore_orders.entity.class:           DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrders
+    demacmedia_physicalstore_orderitems.entity.class:       DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrderItems
+    demacmedia_physicalstore.manager.api.class:             Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+
+services:
+    # ACCOUNTS
+    demacmedia_physicalstore_accounts.manager.api:
+        class: %demacmedia_physicalstore.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %demacmedia_physicalstore_accounts.entity.class%
+            - @doctrine.orm.entity_manager
+
+
+    # ORDERS
+    demacmedia_physicalstore_orders.manager.api:
+        class: %demacmedia_physicalstore.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+        - %demacmedia_physicalstore_orders.entity.class%
+        - @doctrine.orm.entity_manager
+
+
+    # ORDER ITEMS
+    demacmedia_physicalstore_orderitems.manager.api:
+        class: %demacmedia_physicalstore.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+        - %demacmedia_physicalstore_orderitems.entity.class%
+        - @doctrine.orm.entity_manager
