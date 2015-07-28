@@ -1,0 +1,24 @@
+{
+  "name": "DemacMedia/PhysicalStoreBundle",
+  "description": "Add Customizations on SalesBundle",
+  "homepage": "https://github.com/DemacMedia/PhysicalStoreBundle.git",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "name": "Demac Media",
+      "homepage": "https://github.com/DemacMedia/"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "DemacMedia\\Bundle\\PhysicalStoreBundle": "src/"
+    }
+  },
+  "target-dir": "src/DemacMedia/Bundle/PhysicalStoreBundle",
+  "require": {
+    "php": ">=5.4.4",
+    "oro/platform": "1.*",
+    "oro/crm": "1.*"
+  },
+  "minimum-stability": "stable"
+}
