@@ -352,9 +352,27 @@ class OroPhysicalStoreOrders
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getInvdte()
+    {
+        return $this->invdate;
+    }
+
+    /**
      * @param \DateTime $invdate
      */
     public function setInvdate($invdate)
+    {
+        $this->invdate = $invdate;
+
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $invdate
+     */
+    public function setInvdte($invdate)
     {
         $this->invdate = $invdate;
 

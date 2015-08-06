@@ -48,6 +48,14 @@ class PhysicalStoreOrdersType extends AbstractType
                 ]
             )
             ->add(
+                'cshipno',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Cshipno',
+                ]
+            )
+            ->add(
                 'taxrate',
                 'text',
                 [

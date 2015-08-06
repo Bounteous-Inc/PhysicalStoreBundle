@@ -131,6 +131,7 @@ datagrid:
                 label: demacmedia_physicalstore.orders.custno.label
             invdate:
                 label: demacmedia_physicalstore.orders.invdate.label
+                frontend_type: date
             shipvia:
                 label: demacmedia_physicalstore.orders.shipvia.label
             updated:
@@ -220,6 +221,7 @@ datagrid:
                 label: demacmedia_physicalstore.accounts.contact.label
             invdate:
                 label: demacmedia_physicalstore.orders.invdate.label
+                frontend_type: date
             shipvia:
                 label: demacmedia_physicalstore.orders.shipvia.label
             updated:
@@ -316,7 +318,7 @@ datagrid:
                 label: demacmedia_physicalstore.order_items.qtyord.label
             invdate:
                 label: demacmedia_physicalstore.order_items.invdate.label
-                frontend_type: datetime
+                frontend_type: date
             updated:
                 label: demacmedia_physicalstore.order_items.updated.label
                 frontend_type: datetime

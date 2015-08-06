@@ -106,39 +106,6 @@ class OroPhysicalStoreOrderItems
     protected $item;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="taxrate", type="percent", nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="Tax Rate",
-     *              "plural_label"="Taxes Rate",
-     *              "description"="Tax Rate"
-     *          }
-     *      }
-     * )
-     */
-    protected $taxrate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="invdate", type="datetime", nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="Inventory Date",
-     *              "plural_label"="Inventories Date",
-     *              "description"="Inventory Date"
-     *          }
-     *      }
-     * )
-     */
-    protected $invdate;
-
-
-    /**
      * @var string
      *
      * @ORM\Column(name="descrip", type="string", length=32, nullable=true)
@@ -153,6 +120,22 @@ class OroPhysicalStoreOrderItems
      * )
      */
     protected $descrip;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="taxrate", type="percent", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Tax Rate",
+     *              "plural_label"="Taxes Rate",
+     *              "description"="Tax Rate"
+     *          }
+     *      }
+     * )
+     */
+    protected $taxrate;
 
     /**
      * @var double
@@ -186,7 +169,6 @@ class OroPhysicalStoreOrderItems
      */
     protected $price;
 
-
     /**
      * @var float
      *
@@ -203,6 +185,21 @@ class OroPhysicalStoreOrderItems
      */
     protected $qtyord;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="invdate", type="datetime", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Inventory Date",
+     *              "plural_label"="Inventories Date",
+     *              "description"="Inventory Date"
+     *          }
+     *      }
+     * )
+     */
+    protected $invdate;
 
     /**
      * @var \DateTime
@@ -435,25 +432,6 @@ class OroPhysicalStoreOrderItems
     }
 
     /**
-     * @return string
-     */
-    public function getShipvia()
-    {
-        return $this->shipvia;
-    }
-
-    /**
-     * @param string $shipvia
-     */
-    public function setShipvia($shipvia)
-    {
-        $this->shipvia = $shipvia;
-
-        return $this;
-    }
-
-
-    /**
      * @return float
      */
     public function getTaxrate()
@@ -470,8 +448,6 @@ class OroPhysicalStoreOrderItems
 
         return $this;
     }
-
-
 
     /**
      * @return float
@@ -490,7 +466,6 @@ class OroPhysicalStoreOrderItems
 
         return $this;
     }
-
 
     /**
      * Get created date

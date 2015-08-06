@@ -294,6 +294,8 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
             }
         }
 
+        die($physicalStoreOrders->getInvdte());
+
         try {
             if ($update == true && is_object($entity) || !$update && !is_object($entity)) {
                 $this->getEntityManager()->persist($physicalStoreOrders);
@@ -310,14 +312,40 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         $entity = null;
         $update = false;
 
-        if (!$data[$header['custno']] || !$data[$header['invno']]) {
+        if (!$data[$header['invno']]) {
             return false;
+        }
+
+        if (preg_match_all('/\.000000/', $data[$header['invno']])) {
+            $data[$header['invno']] = (int) $data[$header['invno']];
+        }
+
+        if (!$data[$header['custno']]) {
+
+            $custnoEntity = $this->getEntityManager()
+                ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders')->findOneBy([
+                    'invno'  => $data[$header['invno']]
+                ]);
+
+            if ($custnoEntity) {
+                $data[$header['custno']] = $custnoEntity->getCustno();
+                die('achoU!');
+            }
+
+            $this->getEntityManager()->clear();
+
+            if (!$data[$header['custno']]) {
+                return false;
+            } else {
+                echo 'Customer Number: ' .PHP_EOL;
+                print_r($data);
+                die;
+            }
         }
 
         $physicalStoreOrderItems = $this->getEntityManager()
             ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrderItems')->findOneBy([
-            'invno'  => $data[$header['invno']],
-            'custno' => $data[$header['custno']]
+            'invno'  => $data[$header['invno']]
         ]);
 
         if (!$physicalStoreOrderItems) {

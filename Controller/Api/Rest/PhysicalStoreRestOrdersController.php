@@ -93,24 +93,17 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
         // Example creating a new Account.
         $response = $oroClient->post('api/rest/latest/physicalstore/orders.json', [
             'body' => [
-                'custno'            => 'AAAAA', // Required
-                'company'           => 'Acme Company',
-                'contact'           => 'AAAAA AAAAA', // Required
-                'title'             => 'Dr.',
-                'address1'          => 'Street Foo, Bar, 1',
-                'address2'          => 'Street Foo2, Bar2, 2',
-                'city'              => 'My City', // Required
-                'addrstate'         => 'ON',
-                'zip'               => 'M9MM9M',
-                'country'           => 'Canada',
-                'phone'             => '9999999', // Required
-                'phone2'            => '88888888',
-                'source'            => 'Radio',
-                'type'              => 'Client Type X',
-                'email'             => 'aaaaa@example.org',
-                'custmemo'          => 'Comment about anything',
-                'url'               => 'http://example.org',
-                'owner'             => '17',
+                'invno'            => '750831', // Required
+                'custno'           => '400200', // Required
+                'invdate'           => '07/21/15',
+                'shipvia'             => 'Ground',
+                'cshipno'          => '1ZA4W9300356834755',
+                'taxrate'          => '',
+                'tax'              => '',
+                'invamt'         => '',
+                'ponum'               => '',
+                'refno'           => '',
+                'owner'             => '19',
             ]
         ]);
      *
