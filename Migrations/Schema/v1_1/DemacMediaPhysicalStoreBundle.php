@@ -1,6 +1,6 @@
 <?php
 
-namespace DemacMedia\Bundle\DemacMediaPhysicalStoreBundle\Migrations\Schema\v1_1;
+namespace DemacMedia\Bundle\PhysicalStoreBundle\Migrations\Schema\v1_1;
 
 use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
