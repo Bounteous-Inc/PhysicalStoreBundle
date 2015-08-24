@@ -31,7 +31,7 @@ demacmedia_physicalstore:
         new:                  'New Order'
         updated.label:        'Updated'
         created.label:        'Created'
-        invdate.label:        'Inventory Date'
+        invdate.label:        'Invoice Date'
         oroid.label:          'ORO ID'
         taxrate.label:        'Tax Rate'
         salesrep.label:       'Sales Representative'
