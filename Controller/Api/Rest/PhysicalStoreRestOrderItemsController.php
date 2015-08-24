@@ -88,30 +88,24 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
      * Create new Physical Store Order Items
      *
         // Example creating a new Order Items.
-        $response = $oroClient->post('api/rest/latest/physicalstore/orderitems.json', [
-            'body' => [
-                'custno' => 'NNNNN',
-                'company' => 'NNNNNNNNNNN NNNNNN',
-                'contact' => 'NNNNN NNNNN',
-                'title' => 'Teacher',
-                'address1' => 'NN NNN NNNNN.',
-                'address2' => [],
-                'city' => 'NNNNNNN',
-                'zip' => 'NNN NNN',
-                'country' => 'NNNNNNN',
-                'phone' => 'NNNNNNNNNNN',
-                'phone2' => [],
-                'source' => 'NO-SPECIFIC',
-                'lastpay' => [],
-                'entered' => [],
-                'comment' => 'Piano Teacher',
-                'faxno' => [],
-                'addrstate' => 'ON',
-                'email' => 'nnnnn@example.org',
-                'datemod' => [],
-                'created_at' => '0000-00-00 00:00:00',
+        $response = $oroClient->post(
+                'api/rest/latest/physicalstore/orderitems.json', [
+                    'body' => [
+                    'invno'     => $csvLine['invno'], // Required
+                    'custno'    => $csvLine['custno'], // Required
+                    'item'      => $csvLine['item'],
+                    'descrip'   => $csvLine['descrip'],
+                    'taxrate'   => $csvLine['taxrate'],
+                    'cost'      => $csvLine['cost'],
+                    'price'     => $csvLine['price'],
+                    'qtyord'    => $csvLine['qtyord'],
+                    'qtyshp'    => $csvLine['qtyshp'],
+                    'extprice'  => $csvLine['extprice'],
+                    'invdate'   => $csvLine['invdate'],
+                    'ponum'     => $csvLine['ponum'],
+                ]
             ]
-        ]);
+        );
      *
      * @ApiDoc(
      * description="Create new Physical Store Order Items.",
@@ -198,7 +192,7 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
      */
     public function getForm()
     {
-        return $this->get('demacmedia_physicalstore_orderitems.type');
+        return $this->get('demacmedia_physicalstore_orderitems.form.orderitems.api');
     }
 
 
@@ -207,6 +201,6 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
      */
     public function getFormHandler()
     {
-        return $this->get('demacmedia_physicalstore_orderitems.handler');
+        return $this->get('demacmedia_physicalstore_orderitems.form.handler.orderitems_api');
     }
 }

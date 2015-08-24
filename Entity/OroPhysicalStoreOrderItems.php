@@ -169,6 +169,24 @@ class OroPhysicalStoreOrderItems
      */
     protected $price;
 
+
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="extprice", type="money", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Ext Price",
+     *              "plural_label"="Ext Prices",
+     *              "description"="Ext Price"
+     *          }
+     *      }
+     * )
+     */
+    protected $extprice;
+
+
     /**
      * @var float
      *
@@ -186,6 +204,22 @@ class OroPhysicalStoreOrderItems
     protected $qtyord;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="qtyshp", type="float", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Quantity of order shipped",
+     *              "plural_label"="Quantities of orders shipped",
+     *              "description"="Quantity of order shipped"
+     *          }
+     *      }
+     * )
+     */
+    protected $qtyshp;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="invdate", type="datetime", nullable=true)
@@ -200,6 +234,22 @@ class OroPhysicalStoreOrderItems
      * )
      */
     protected $invdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ponum", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Ponum",
+     *              "plural_label"="Ponum",
+     *              "description"="Ponum"
+     *          }
+     *      }
+     * )
+     */
+    protected $ponum;
 
     /**
      * @var \DateTime
@@ -312,6 +362,24 @@ class OroPhysicalStoreOrderItems
     /**
      * @return float
      */
+    public function getExtprice()
+    {
+        return $this->extprice;
+    }
+
+    /**
+     * @param float $extprice
+     */
+    public function setExtprice($extprice)
+    {
+        $this->extprice = $extprice;
+    }
+
+
+
+    /**
+     * @return float
+     */
     public function getPrice()
     {
         return $this->price;
@@ -359,6 +427,24 @@ class OroPhysicalStoreOrderItems
     {
         $this->item = $item;
     }
+
+    /**
+     * @return float
+     */
+    public function getQtyshp()
+    {
+        return $this->qtyshp;
+    }
+
+    /**
+     * @param float $qtyshp
+     */
+    public function setQtyshp($qtyshp)
+    {
+        $this->qtyshp = $qtyshp;
+    }
+
+
 
     /**
      * @return string
@@ -430,6 +516,24 @@ class OroPhysicalStoreOrderItems
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getPonum()
+    {
+        return $this->ponum;
+    }
+
+    /**
+     * @param string $ponum
+     */
+    public function setPonum($ponum)
+    {
+        $this->ponum = $ponum;
+    }
+
+
 
     /**
      * @return float

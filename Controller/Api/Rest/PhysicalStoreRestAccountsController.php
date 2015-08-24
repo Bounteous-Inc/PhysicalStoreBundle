@@ -17,9 +17,8 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
 use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
 use Oro\Bundle\SoapBundle\Form\Handler\ApiFormHandler;
-use Oro\Bundle\CommentBundle\Entity\Manager\CommentApiManager;
+use DemacMedia\Bundle\PhysicalStoreBundle\Entity\Manager\OroPhysicalStoreAccountsApiManager;
 use DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreAccounts;
-
 
 
 /**
@@ -110,7 +109,7 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
                 'email'             => 'aaaaa@example.org',
                 'custmemo'          => 'Comment about anything',
                 'url'               => 'http://example.org',
-                'owner'             => '17',
+                'salesrep'          => 'Sales Rep Name',
             ]
         ]);
      *

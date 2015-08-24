@@ -96,6 +96,134 @@ class PhysicalStoreOrdersType extends AbstractType
                 ]
             )
             ->add(
+                'salesrep',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Salesrep',
+                ]
+            )
+            ->add(
+                'status',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Status',
+                ]
+            )
+            ->add(
+                'shipname',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Name',
+                ]
+            )
+            ->add(
+                'shipcontact',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Contact',
+                ]
+            )
+            ->add(
+                'shipcontactphone',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Contact Phone',
+                ]
+            )
+            ->add(
+                'shipaddr1',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Addr1',
+                ]
+            )
+            ->add(
+                'shipaddr2',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Addr2',
+                ]
+            )
+            ->add(
+                'shipcity',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship City',
+                ]
+            )
+            ->add(
+                'shipstate',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship State',
+                ]
+            )
+            ->add(
+                'shipzip',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Zip',
+                ]
+            )
+            ->add(
+                'shipcountry',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ship Country',
+                ]
+            )
+            ->add(
+                'vendorno',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Vendor',
+                ]
+            )
+            ->add(
+                'freight',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'freight',
+                ]
+            )
+            ->add(
+                'dateord',
+                'oro_datetime',
+                [
+                    'required'    => false,
+                    'label'       => 'dateord',
+                ]
+            )
+            ->add(
+                'estshpdate',
+                'oro_datetime',
+                [
+                    'required'    => false,
+                    'label'       => 'estshpdate',
+                ]
+            )
+            ->add(
+                'shipdate',
+                'oro_datetime',
+                [
+                    'required'    => false,
+                    'label'       => 'shipdate',
+                ]
+            )
+            ->add(
                 'created',
                 'oro_datetime',
                 [

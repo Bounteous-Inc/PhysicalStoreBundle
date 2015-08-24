@@ -65,7 +65,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Get specific account data
+     * Get specific order data
      *
         // Get a specific account using a id. In this example id=1
         $physicalOrdersResponse = $oroClient->get('api/rest/latest/physicalstore/orders/1.json', []);
@@ -73,7 +73,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @ApiDoc(
-     * description="Get a specific Physical Store account info",
+     * description="Get a specific Physical Store order info",
      * resource=true,
      * requirements={
      * {"name"="id", "dataType"="integer"},
@@ -88,27 +88,42 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Create new PhysicalStore Account
+     * Create new PhysicalStore Order
      *
-        // Example creating a new Account.
+        // Example creating a new Order.
         $response = $oroClient->post('api/rest/latest/physicalstore/orders.json', [
             'body' => [
                 'invno'            => '750831', // Required
                 'custno'           => '400200', // Required
-                'invdate'           => '07/21/15',
-                'shipvia'             => 'Ground',
+                'invdate'          => '07/21/15',
+                'shipvia'          => 'Ground',
                 'cshipno'          => '1ZA4W9300356834755',
                 'taxrate'          => '',
                 'tax'              => '',
-                'invamt'         => '',
-                'ponum'               => '',
-                'refno'           => '',
-                'owner'             => '19',
+                'invamt'           => '',
+                'ponum'            => '',
+                'refno'            => '',
+                'salesrep'         => 'Sales Rep Name',
+                'status'           => 'Order Status',
+                'shipname'         => 'Ship Name (Company)',
+                'shipcontact'      => 'Ship Contact Name',
+                'shipcontactphone' => '123123123123',
+                'shipaddr1'        => 'Address 1',
+                'shipaddr2'        => 'Address 2',
+                'shipcity'         => 'Chicago',
+                'shipstate'        => 'IL',
+                'shipzip'          => '123123',
+                'shipcountry'      => 'USA',
+                'vendorno'         => '11111111',
+                'freight'          => '1',
+                'dateord'          => '07/21/15',
+                'estshpdate'       => '07/21/15',
+                'shipdate'         => '07/21/15'
             ]
         ]);
      *
      * @ApiDoc(
-     * description="Create new Physical Store Account.",
+     * description="Create new Physical Store Order.",
      * resource=true
      * )
      * @AclAncestor("demacmedia_physicalstore_orders_create")
@@ -121,35 +136,43 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Update Physical Store account
+     * Update Physical Store Order
      *
         $request = $oroClient->put('api/rest/latest/physicalstore/orders/6.json', [
             'body' => [
-                'custno'            => 'AAAAA', // Required
-                'company'           => 'Acme Company',
-                'contact'           => 'AAAAA AAAAA', // Required
-                'title'             => 'Dr.',
-                'address1'          => 'Street Foo, Bar, 1',
-                'address2'          => 'Street Foo2, Bar2, 2',
-                'city'              => 'Toronto', // Required
-                'addrstate'         => 'ON',
-                'zip'               => 'M9MM9M',
-                'country'           => 'Canada',
-                'phone'             => '9999999', // Required
-                'phone2'            => '88888888',
-                'source'            => 'Radio',
-                'type'              => 'Client Type X',
-                'email'             => 'aaaaa@example.org',
-                'custmemo'          => 'Comment about anything',
-                'url'               => 'http://example.org',
-                'owner'             => '17',
+                'invno'            => '750831', // Required
+                'custno'           => '400200', // Required
+                'invdate'          => '07/21/15',
+                'shipvia'          => 'Ground',
+                'cshipno'          => '1ZA4W9300356834755',
+                'taxrate'          => '',
+                'tax'              => '',
+                'invamt'           => '',
+                'ponum'            => '',
+                'refno'            => '',
+                'salesrep'         => 'Sales Rep Name',
+                'status'           => 'Order Status',
+                'shipname'         => 'Ship Name (Company)',
+                'shipcontact'      => 'Ship Contact Name',
+                'shipcontactphone' => '123123123123',
+                'shipaddr1'        => 'Address 1',
+                'shipaddr2'        => 'Address 2',
+                'shipcity'         => 'Chicago',
+                'shipstate'        => 'IL',
+                'shipzip'          => '123123',
+                'shipcountry'      => 'USA',
+                'vendorno'         => '11111111',
+                'freight'          => '1',
+                'dateord'          => '07/21/15',
+                'estshpdate'       => '07/21/15',
+                'shipdate'         => '07/21/15'
             ]
         ]);
      *
      * @param int $id Comment item id
      *
      * @ApiDoc(
-     * description="Update Physical Store account",
+     * description="Update Physical Store Order",
      * resource=true
      * )
      * @AclAncestor("demacmedia_physicalstore_orders_update")
@@ -173,7 +196,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Delete Physical Store account
+     * Delete Physical Store Order
      *
         // Example deleting Account with id: 1
         $response = $oroClient->delete('api/rest/latest/physicalstore/orders/1.json');
@@ -181,7 +204,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
      * @param int $id comment id
      *
      * @ApiDoc(
-     *      description="Delete PhysicalStore account",
+     *      description="Delete PhysicalStore order",
      *      resource=true
      * )
      * @Acl(

@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Company:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.company.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entityAccounts.company|default('N/A') }}</div>
                     </div>
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Url:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.url.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entityAccounts.url|default('N/A') }}</div>
                     </div>
@@ -160,6 +160,15 @@
                 </div>
 
                 <div class="control-group">
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.status.label'|trans }}:</label>
+                    <div class="controls">
+                        <div class="control-label">
+                            <strong>{{ entity.status ? entity.status: 'N/A'|trans }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
                     <label class="control-label">ORO-ID:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.id|default('N/A') }}</div>
@@ -167,14 +176,14 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">INVNO:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.invno.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.invno|default('N/A') }}</div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">INVDATE:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.invdate.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">
                             {{ entity.invdate ? entity.invdate|oro_format_datetime : 'N/A'|trans }}
@@ -183,14 +192,14 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">SHIPVIA:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.shipvia.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.shipvia|default('N/A') }}</div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">CSHIPNO:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.cshipno.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.cshipno|default('N/A') }}</div>
                     </div>
@@ -206,7 +215,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Tax:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.tax.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">
                             {{ entity.tax ? entity.tax|oro_format_currency : 'N/A'|trans }}
@@ -215,7 +224,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">INVAMT:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.invamt.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">
                             {{ entity.invamt ? entity.invamt|oro_format_currency : 'N/A'|trans }}
@@ -224,21 +233,21 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">PONUM:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.ponum.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.ponum|default('N/A') }}</div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">REFNO:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.refno.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">{{ entity.refno|default('N/A') }}</div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Created:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.created.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">
                             {{ entity.created ? entity.created|oro_format_datetime : 'N/A'|trans }}
@@ -247,7 +256,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Updated:</label>
+                    <label class="control-label">{{ 'demacmedia_physicalstore.orders.updated.label'|trans }}:</label>
                     <div class="controls">
                         <div class="control-label">
                             {{ entity.updated ? entity.updated|oro_format_datetime : 'N/A'|trans }}
@@ -255,7 +264,14 @@
                     </div>
                 </div>
 
-
+                <div class="control-group">
+                    <label class="control-label">Sales Representative:</label>
+                    <div class="controls">
+                        <div class="control-label">
+                            {{ entity.salesrep ? entity.salesrep: 'N/A'|trans }}
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

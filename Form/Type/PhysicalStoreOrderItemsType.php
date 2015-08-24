@@ -64,19 +64,59 @@ class PhysicalStoreOrderItemsType extends AbstractType
                 ]
             )
             ->add(
-                'tax',
+                'cost',
                 'text',
                 [
                     'required'    => false,
-                    'label'       => 'Tax',
+                    'label'       => 'Cost',
                 ]
             )
             ->add(
-                'invamt',
+                'price',
                 'text',
                 [
-                    'required'    => true,
-                    'label'       => 'Invamt',
+                    'required'    => false,
+                    'label'       => 'Price',
+                ]
+            )
+            ->add(
+                'qtyord',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Qty Ord',
+                ]
+            )
+            ->add(
+                'qtyshp',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Qty Ord',
+                ]
+            )
+            ->add(
+                'qtyord',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Qty Ord',
+                ]
+            )
+            ->add(
+                'qtyshp',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Qty shp',
+                ]
+            )
+            ->add(
+                'extprice',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Ext price',
                 ]
             )
             ->add(
@@ -85,38 +125,6 @@ class PhysicalStoreOrderItemsType extends AbstractType
                 [
                     'required'    => false,
                     'label'       => 'Ponum',
-                ]
-            )
-            ->add(
-                'cshipno',
-                'text',
-                [
-                    'required'    => false,
-                    'label'       => 'Cshipno',
-                ]
-            )
-            ->add(
-                'refno',
-                'text',
-                [
-                    'required'    => false,
-                    'label'       => 'Refno',
-                ]
-            )
-            ->add(
-                'created',
-                'oro_datetime',
-                [
-                    'required'    => false,
-                    'label'       => 'Created At',
-                ]
-            )
-            ->add(
-                'updated',
-                'oro_datetime',
-                [
-                    'required'    => false,
-                    'label'       => 'Updated At',
                 ]
             );
     }

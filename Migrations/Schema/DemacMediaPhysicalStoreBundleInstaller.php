@@ -13,7 +13,7 @@ class DemacMediaPhysicalStoreBundle implements Installation
      */
     public function getMigrationVersion()
     {
-        return 'v1_0';
+        return 'v1_1';
     }
 
     /**
@@ -117,8 +117,8 @@ class DemacMediaPhysicalStoreBundle implements Installation
         $table = $schema->createTable('oro_physicalstore_order_items');
 
         $table->addColumn('id',        'integer',   ['autoincrement' => true]);
-        $table->addColumn('invno',      'string',   ['length' => 32, 'notnull' => true]);
-        $table->addColumn('custno',     'string',   ['length' => 32, 'notnull' => true]);
+        $table->addColumn('invno',     'string',   ['length' => 32, 'notnull' => true]);
+        $table->addColumn('custno',    'string',   ['length' => 32, 'notnull' => true]);
         $table->addColumn('item',      'string',    ['length' => 255, 'notnull' => false]);
         $table->addColumn('descrip',   'string',    ['length' => 255, 'notnull' => false]);
         $table->addColumn('taxrate',   'float',     ['notnull' => false]);

@@ -294,7 +294,7 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
             }
         }
 
-        die($physicalStoreOrders->getInvdte());
+       // die($physicalStoreOrders->getInvdte());
 
         try {
             if ($update == true && is_object($entity) || !$update && !is_object($entity)) {

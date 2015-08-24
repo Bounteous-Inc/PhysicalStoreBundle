@@ -219,6 +219,262 @@ class OroPhysicalStoreOrders
     protected $refno;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Status",
+     *              "plural_label"="Status",
+     *              "description"="Order Status"
+     *          }
+     *      }
+     * )
+     */
+    protected $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salesrep", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Sales Representative",
+     *              "plural_label"="Sales Representatives",
+     *              "description"="Sales Representative"
+     *          }
+     *      }
+     * )
+     */
+    protected $salesrep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipname", type="string", length=64, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipname",
+     *              "plural_label"="shipnames",
+     *              "description"="shipname"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipcontact", type="string", length=64, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipcontact",
+     *              "plural_label"="shipcontact",
+     *              "description"="shipcontact"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipcontact;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipcontactphone", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipcontactphone",
+     *              "plural_label"="shipcontactphone",
+     *              "description"="shipcontactphone"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipcontactphone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipaddr1", type="string", length=255, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipaddr1",
+     *              "plural_label"="shipaddr1",
+     *              "description"="shipaddr1"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipaddr1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipaddr2", type="string", length=255, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipaddr2",
+     *              "plural_label"="shipaddr2",
+     *              "description"="shipaddr2"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipaddr2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipcity", type="string", length=64, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipcity",
+     *              "plural_label"="shipcity",
+     *              "description"="shipcity"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipcity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipstate", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipstate",
+     *              "plural_label"="shipstate",
+     *              "description"="shipstate"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipstate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipzip", type="string", length=12, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipzip",
+     *              "plural_label"="shipzip",
+     *              "description"="shipzip"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipzip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shipcountry", type="string", length=64, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipcountry",
+     *              "plural_label"="shipcountry",
+     *              "description"="shipcountry"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipcountry;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vendorno", type="string", length=48, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="vendorno",
+     *              "plural_label"="vendorno",
+     *              "description"="vendorno"
+     *          }
+     *      }
+     * )
+     */
+    protected $vendorno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="freight", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="freight",
+     *              "plural_label"="freight",
+     *              "description"="freight"
+     *          }
+     *      }
+     * )
+     */
+    protected $freight;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateord", type="datetime", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="dateord",
+     *              "plural_label"="dateord",
+     *              "description"="dateord"
+     *          }
+     *      }
+     * )
+     */
+    protected $dateord;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="estshpdate", type="datetime", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="estshpdate",
+     *              "plural_label"="estshpdate",
+     *              "description"="estshpdate"
+     *          }
+     *      }
+     * )
+     */
+    protected $estshpdate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="shipdate", type="datetime", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="shipdate",
+     *              "plural_label"="shipdate",
+     *              "description"="shipdate"
+     *          }
+     *      }
+     * )
+     */
+    protected $shipdate;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
@@ -503,6 +759,262 @@ class OroPhysicalStoreOrders
         $this->refno = $refno;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalesrep()
+    {
+        return $this->salesrep;
+    }
+
+    /**
+     * @param string $salesrep
+     */
+    public function setSalesrep($salesrep)
+    {
+        $this->salesrep = $salesrep;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipname()
+    {
+        return $this->shipname;
+    }
+
+    /**
+     * @param string $shipname
+     */
+    public function setShipname($shipname)
+    {
+        $this->shipname = $shipname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipcontact()
+    {
+        return $this->shipcontact;
+    }
+
+    /**
+     * @param string $shipcontact
+     */
+    public function setShipcontact($shipcontact)
+    {
+        $this->shipcontact = $shipcontact;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipcontactphone()
+    {
+        return $this->shipcontactphone;
+    }
+
+    /**
+     * @param string $shipcontactphone
+     */
+    public function setShipcontactphone($shipcontactphone)
+    {
+        $this->shipcontactphone = $shipcontactphone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipaddr1()
+    {
+        return $this->shipaddr1;
+    }
+
+    /**
+     * @param string $shipaddr1
+     */
+    public function setShipaddr1($shipaddr1)
+    {
+        $this->shipaddr1 = $shipaddr1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipaddr2()
+    {
+        return $this->shipaddr2;
+    }
+
+    /**
+     * @param string $shipaddr2
+     */
+    public function setShipaddr2($shipaddr2)
+    {
+        $this->shipaddr2 = $shipaddr2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipcity()
+    {
+        return $this->shipcity;
+    }
+
+    /**
+     * @param string $shipcity
+     */
+    public function setShipcity($shipcity)
+    {
+        $this->shipcity = $shipcity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipstate()
+    {
+        return $this->shipstate;
+    }
+
+    /**
+     * @param string $shipstate
+     */
+    public function setShipstate($shipstate)
+    {
+        $this->shipstate = $shipstate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipzip()
+    {
+        return $this->shipzip;
+    }
+
+    /**
+     * @param string $shipzip
+     */
+    public function setShipzip($shipzip)
+    {
+        $this->shipzip = $shipzip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipcountry()
+    {
+        return $this->shipcountry;
+    }
+
+    /**
+     * @param string $shipcountry
+     */
+    public function setShipcountry($shipcountry)
+    {
+        $this->shipcountry = $shipcountry;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVendorno()
+    {
+        return $this->vendorno;
+    }
+
+    /**
+     * @param string $vendorno
+     */
+    public function setVendorno($vendorno)
+    {
+        $this->vendorno = $vendorno;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFreight()
+    {
+        return $this->freight;
+    }
+
+    /**
+     * @param string $freight
+     */
+    public function setFreight($freight)
+    {
+        $this->freight = $freight;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateord()
+    {
+        return $this->dateord;
+    }
+
+    /**
+     * @param \DateTime $dateord
+     */
+    public function setDateord($dateord)
+    {
+        $this->dateord = $dateord;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEstshpdate()
+    {
+        return $this->estshpdate;
+    }
+
+    /**
+     * @param \DateTime $estshpdate
+     */
+    public function setEstshpdate($estshpdate)
+    {
+        $this->estshpdate = $estshpdate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getShipdate()
+    {
+        return $this->shipdate;
+    }
+
+    /**
+     * @param \DateTime $shipdate
+     */
+    public function setShipdate($shipdate)
+    {
+        $this->shipdate = $shipdate;
     }
 
     /**

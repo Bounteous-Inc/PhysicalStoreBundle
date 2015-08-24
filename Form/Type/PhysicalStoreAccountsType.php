@@ -150,7 +150,16 @@ class PhysicalStoreAccountsType extends AbstractType
                     'required'    => false,
                     'label'       => 'Url',
                 ]
-            )->add(
+            )
+            ->add(
+                'salesrep',
+                'text',
+                [
+                    'required'    => false,
+                    'label'       => 'Salesrep',
+                ]
+            )
+            ->add(
                 'created',
                 'oro_datetime',
                 [

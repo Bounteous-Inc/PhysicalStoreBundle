@@ -331,6 +331,22 @@ class OroPhysicalStoreAccounts
     protected $url;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="salesrep", type="string", length=32, nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="Sales Representative",
+     *              "plural_label"="Sales Representatives",
+     *              "description"="Sales Representative"
+     *          }
+     *      }
+     * )
+     */
+    protected $salesrep;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
@@ -723,6 +739,22 @@ class OroPhysicalStoreAccounts
         $this->url = $url;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalesrep()
+    {
+        return $this->salesrep;
+    }
+
+    /**
+     * @param string $salesrep
+     */
+    public function setSalesrep($salesrep)
+    {
+        $this->salesrep = $salesrep;
     }
 
     /**

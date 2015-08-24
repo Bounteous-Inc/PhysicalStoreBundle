@@ -1,10 +1,11 @@
 demacmedia_physicalstore:
     accounts:
+        id.label:             'oro-id'
         entity.label:         'In-store Account'
         entity_plural.label:  'In-store Accounts'
         custno.label:         Custno
         company.label:        Company
-        contact.label:        Contact
+        contact.label:        'Client Name'
         title.label:          Title
         address1.label:       'Address 1'
         city.label:           City
@@ -13,37 +14,52 @@ demacmedia_physicalstore:
         source.label:         Source
         new:                  'New Account'
         updated.label:        'Updated'
+        created.label:        'Created'
         email.label:          'Email'
+        salesrep.label:       'Sales Representative'
 
     orders:
         entity.label:         'In-store Order'
         entity_plural.label:  'In-store Orders'
         custno.label:         'Customer Number'
-        invno.label:          Invno
-        invdte.label:         'Inventory Date'
+        invno.label:          'Order Number'
+        invdte.label:         'Order Date'
         shipvia.label:        Shipvia
         tax.label:            Tax
-        invamt.label:         invamt
+        invamt.label:         'Total Paid'
+        INVAMT.label:         'Total Paid'
         new:                  'New Order'
         updated.label:        'Updated'
+        created.label:        'Created'
         invdate.label:        'Inventory Date'
         oroid.label:          'ORO ID'
-        invamt.label:         'Amount Paid'
         taxrate.label:        'Tax Rate'
+        salesrep.label:       'Sales Representative'
+        status.label:         'Status'
+        shipcontact.label:    'Ship Contact'
+        dateord.label:        'Order Date'
+        shipcity.label:       'Ship City'
+        vendorno.label:       'Vendor'
+        cshipno.label:        'Shipment Number'
+        refno.label:          'Ref Number'
+        ponum.label:          'Ponum'
+        company.label:        'Company Name'
+        url.label:            'URL'
+
 
     order_items:
         entity.label:         'In-store Items'
         entity_plural.label:  'In-store Items'
         oroid.label:          'Oro-ID'
-        invno.label:          Invno
+        invno.label:          'Order Number'
         custno.label:         Custno
         item.label:           SKU
         descrip.label:        Description
         taxrate.label:        Taxrate
-        cost.label:           Cost
-        price.label:          Price
-        qtyord.label:         Qtyord
-        qtyshp.label:         Qtyshp
+        cost.label:           'Unit Price'
+        price.label:          'Total Paid'
+        qtyord.label:         'Quantity'
+        qtyshp.label:         'Quantity'
         extprice.label:       Extprice
         invdte.label:         Invdte
         terr.label:           Terr
@@ -54,6 +70,7 @@ demacmedia_physicalstore:
         datemod.label:        Datemode
         iarclss.label:        Iarclss
         arstat.label:         Arstat
+        ponum.label:          Ponum
         invdate.label:        Invdate
         updated.label:        Updated
         created.label:        Created
