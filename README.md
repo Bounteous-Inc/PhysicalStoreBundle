@@ -1,3 +1,3 @@
 ####PhysicalStoreBundle
 
-Integration with ERP v1.0
+Integration with ERP v1.1
