@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+
 use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
 use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
 use Oro\Bundle\SoapBundle\Form\Handler\ApiFormHandler;
@@ -161,17 +162,7 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
      */
     public function putAction($id)
     {
-        $entity = $this->getManager()->find($id);
-        if ($entity) {
-            if ($this->processForm($entity)) {
-                $view = $this->view($this->getManager()->getEntityViewModel($entity), Codes::HTTP_OK);
-            } else {
-                $view = $this->view($this->getForm(), Codes::HTTP_BAD_REQUEST);
-            }
-        } else {
-            $view = $this->view(null, Codes::HTTP_NOT_FOUND);
-        }
-        return $this->buildResponse($view, self::ACTION_UPDATE, ['id' => $id, 'entity' => $entity]);
+        return $this->handleUpdateRequest($id);
     }
 
 

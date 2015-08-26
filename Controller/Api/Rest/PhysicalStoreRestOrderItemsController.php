@@ -134,17 +134,7 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
      */
     public function putAction($id)
     {
-        $entity = $this->getManager()->find($id);
-        if ($entity) {
-            if ($this->processForm($entity)) {
-                $view = $this->view($this->getManager()->getEntityViewModel($entity), Codes::HTTP_OK);
-            } else {
-                $view = $this->view($this->getForm(), Codes::HTTP_BAD_REQUEST);
-            }
-        } else {
-            $view = $this->view(null, Codes::HTTP_NOT_FOUND);
-        }
-        return $this->buildResponse($view, self::ACTION_UPDATE, ['id' => $id, 'entity' => $entity]);
+        return $this->handleUpdateRequest($id);
     }
 
 
