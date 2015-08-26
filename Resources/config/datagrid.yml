@@ -202,11 +202,7 @@ datagrid:
                     - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders, alias: physicalstore_orders }
                 join:
                     left:
-                        - { join: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
-                where:
-                    and:
-                        - physicalstore_accounts.custno = physicalstore_orders.custno
-
+                        - { join: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts, conditionType: WITH, condition: 'physicalstore_accounts.custno = physicalstore_orders.custno' }
         columns:
             invno:
                 label: demacmedia_physicalstore.orders.invno.label
@@ -260,6 +256,9 @@ datagrid:
                 invno:
                     type: string
                     data_name: physicalstore_orders.invno
+                contact:
+                    type: string
+                    data_name: physicalstore_accounts.contact
                 shipcontact:
                     type: string
                     data_name: physicalstore_accounts.shipcontact
