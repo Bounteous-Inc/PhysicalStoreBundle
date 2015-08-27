@@ -29,8 +29,8 @@ demacmedia_physicalstore:
         invamt.label:         'Total Paid'
         INVAMT.label:         'Total Paid'
         new:                  'New Order'
-        updated.label:        'Updated'
-        created.label:        'Created'
+        updated.label:        'Oro Update Date'
+        created.label:        'Oro Create Date'
         invdate.label:        'Invoice Date'
         oroid.label:          'ORO ID'
         taxrate.label:        'Tax Rate'
@@ -45,6 +45,7 @@ demacmedia_physicalstore:
         ponum.label:          'Ponum'
         company.label:        'Company Name'
         url.label:            'URL'
+        shipdate.label:       'Ship Date'
 
 
     order_items:

@@ -188,6 +188,7 @@ datagrid:
                     - physicalstore_orders.invno
                     - physicalstore_orders.custno
                     - physicalstore_orders.dateord
+                    - physicalstore_orders.shipdate
                     - physicalstore_orders.shipvia
                     - physicalstore_orders.invamt
                     - physicalstore_accounts.contact
@@ -212,6 +213,9 @@ datagrid:
                 label: demacmedia_physicalstore.orders.shipcontact.label
             dateord:
                 label: demacmedia_physicalstore.orders.dateord.label
+                frontend_type: date
+            shipdate:
+                label: demacmedia_physicalstore.orders.shipdate.label
                 frontend_type: date
             shipvia:
                 label: demacmedia_physicalstore.orders.shipvia.label
@@ -266,8 +270,11 @@ datagrid:
                     type: string
                     data_name: physicalstore_orders.shipvia
                 dateord:
-                    type: datetime
+                    type: date
                     data_name: physicalstore_orders.dateord
+                shipdate:
+                    type: date
+                    data_name: physicalstore_orders.shipdate
                 salesrep:
                     type: string
                     data_name: physicalstore_orders.salesrep
