@@ -79,6 +79,8 @@ datagrid:
                 updated:
                     type: datetime
                     data_name: physicalstore_accounts.updated
+        options:
+            export: true
 
 
     # ORDERS FOR SPECIFIC ORDER
@@ -174,6 +176,8 @@ datagrid:
                 updated:
                     type: datetime
                     data_name: physicalstore_orders.updated
+        options:
+            export: true
 
 
     # ORDERS and ACCOUNTS
@@ -287,6 +291,8 @@ datagrid:
                 status:
                     type: string
                     data_name: physicalstore_orders.status
+        options:
+            export: true
 
 
     physicalstore-order-items-grid:
@@ -360,3 +366,7 @@ datagrid:
                 updated:
                     type: datetime
                     data_name: physicalstore_order_items.updated
+
+        options:
+            export: true
+
