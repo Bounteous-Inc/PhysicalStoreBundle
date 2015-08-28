@@ -8,6 +8,8 @@ datagrid:
                     - physicalstore_accounts.id
                     - physicalstore_accounts.custno
                     - physicalstore_accounts.contact
+                    - physicalstore_accounts.email
+                    - physicalstore_accounts.address1
                     - physicalstore_accounts.city
                     - physicalstore_accounts.country
                     - physicalstore_accounts.phone
@@ -17,12 +19,14 @@ datagrid:
                 from:
                     - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
         columns:
-            id:
-                label: demacmedia_physicalstore.accounts.id.label
             custno:
                 label: demacmedia_physicalstore.accounts.custno.label
             contact:
                 label: demacmedia_physicalstore.accounts.contact.label
+            email:
+                label: demacmedia_physicalstore.accounts.email.label
+            address1:
+                label: demacmedia_physicalstore.accounts.address1.label
             city:
                 label: demacmedia_physicalstore.accounts.city.label
             phone:
@@ -67,6 +71,12 @@ datagrid:
                 contact:
                     type: string
                     data_name: physicalstore_accounts.contact
+                email:
+                    type: string
+                    data_name: physicalstore_accounts.email
+                address1:
+                    type: string
+                    data_name: physicalstore_accounts.address1
                 city:
                     type: string
                     data_name: physicalstore_accounts.city
@@ -80,6 +90,7 @@ datagrid:
                     type: datetime
                     data_name: physicalstore_accounts.updated
         options:
+            entityHint: physicalstore_accounts
             export: true
 
 
@@ -369,4 +380,3 @@ datagrid:
 
         options:
             export: true
-
