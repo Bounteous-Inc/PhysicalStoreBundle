@@ -16,14 +16,14 @@
                     {{ 'oro.ui.created_at'|trans }}:
                     {{ entity.created ? entity.created|oro_format_datetime : 'N/A'|trans }}
                     {% if entity.shipname %}
-                        {{ entity.shipname|oro_format_name|escape }}
+                        {{ entity.shipname|escape }}
                     {% endif %}
                 </li>
                 <li>
                     {{ 'oro.ui.updated_at'|trans }}:
                     {{ entity.updated ? entity.updated|oro_format_datetime : 'N/A'|trans }}
                     {% if entity.shipname %}
-                        {{ entity.shipname|oro_format_name|escape }}
+                        {{ entity.shipname|escape }}
                     {% endif %}
                 </li>
             </ul>
