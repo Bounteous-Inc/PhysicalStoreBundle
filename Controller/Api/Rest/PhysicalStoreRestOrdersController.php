@@ -9,6 +9,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Util\Codes;
 
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -16,6 +17,8 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
 use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
 use Oro\Bundle\SoapBundle\Form\Handler\ApiFormHandler;
+use Oro\Bundle\CommentBundle\Entity\Manager\CommentApiManager;
+use DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrders;
 
 
 
@@ -62,7 +65,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Get specific order data
+     * Get specific account data
      *
         // Get a specific account using a id. In this example id=1
         $physicalOrdersResponse = $oroClient->get('api/rest/latest/physicalstore/orders/1.json', []);
@@ -70,7 +73,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @ApiDoc(
-     * description="Get a specific Physical Store order info",
+     * description="Get a specific Physical Store account info",
      * resource=true,
      * requirements={
      * {"name"="id", "dataType"="integer"},
@@ -90,37 +93,29 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
         // Example creating a new Order.
         $response = $oroClient->post('api/rest/latest/physicalstore/orders.json', [
             'body' => [
-                'invno'            => '750831', // Required
-                'custno'           => '400200', // Required
-                'invdate'          => '07/21/15',
-                'shipvia'          => 'Ground',
-                'cshipno'          => '1ZA4W9300356834755',
-                'taxrate'          => '',
-                'tax'              => '',
-                'invamt'           => '',
-                'ponum'            => '',
-                'refno'            => '',
-                'salesrep'         => 'Sales Rep Name',
-                'status'           => 'Order Status',
-                'shipname'         => 'Ship Name (Company)',
-                'shipcontact'      => 'Ship Contact Name',
-                'shipcontactphone' => '123123123123',
-                'shipaddr1'        => 'Address 1',
-                'shipaddr2'        => 'Address 2',
-                'shipcity'         => 'Chicago',
-                'shipstate'        => 'IL',
-                'shipzip'          => '123123',
-                'shipcountry'      => 'USA',
-                'vendorno'         => '11111111',
-                'freight'          => '1',
-                'dateord'          => '07/21/15',
-                'estshpdate'       => '07/21/15',
-                'shipdate'         => '07/21/15'
+                'custno'            => 'AAAAA', // Required
+                'company'           => 'Acme Company',
+                'contactname'       => 'AAAAA AAAAA', // Required
+                'title'             => 'Dr.',
+                'address1'          => 'Street Foo, Bar, 1',
+                'address2'          => 'Street Foo2, Bar2, 2',
+                'city'              => 'My City', // Required
+                'addrstate'         => 'ON',
+                'zip'               => 'M9MM9M',
+                'country'           => 'Canada',
+                'phone'             => '9999999', // Required
+                'phone2'            => '88888888',
+                'source'            => 'Radio',
+                'type'              => 'Client Type X',
+                'email'             => 'aaaaa@example.org',
+                'custmemo'          => 'Comment about anything',
+                'url'               => 'http://example.org',
+                'owner'             => '17',
             ]
         ]);
      *
      * @ApiDoc(
-     * description="Create new Physical Store Order.",
+     * description="Create new Physical Store Account.",
      * resource=true
      * )
      * @AclAncestor("demacmedia_physicalstore_orders_create")
@@ -133,43 +128,35 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
 
 
     /**
-     * Update Physical Store Order
+     * Update Physical Store account
      *
         $request = $oroClient->put('api/rest/latest/physicalstore/orders/6.json', [
             'body' => [
-                'invno'            => '750831', // Required
-                'custno'           => '400200', // Required
-                'invdate'          => '07/21/15',
-                'shipvia'          => 'Ground',
-                'cshipno'          => '1ZA4W9300356834755',
-                'taxrate'          => '',
-                'tax'              => '',
-                'invamt'           => '',
-                'ponum'            => '',
-                'refno'            => '',
-                'salesrep'         => 'Sales Rep Name',
-                'status'           => 'Order Status',
-                'shipname'         => 'Ship Name (Company)',
-                'shipcontact'      => 'Ship Contact Name',
-                'shipcontactphone' => '123123123123',
-                'shipaddr1'        => 'Address 1',
-                'shipaddr2'        => 'Address 2',
-                'shipcity'         => 'Chicago',
-                'shipstate'        => 'IL',
-                'shipzip'          => '123123',
-                'shipcountry'      => 'USA',
-                'vendorno'         => '11111111',
-                'freight'          => '1',
-                'dateord'          => '07/21/15',
-                'estshpdate'       => '07/21/15',
-                'shipdate'         => '07/21/15'
+                'custno'            => 'AAAAA', // Required
+                'company'           => 'Acme Company',
+                'contact'           => 'AAAAA AAAAA', // Required
+                'title'             => 'Dr.',
+                'address1'          => 'Street Foo, Bar, 1',
+                'address2'          => 'Street Foo2, Bar2, 2',
+                'city'              => 'Toronto', // Required
+                'addrstate'         => 'ON',
+                'zip'               => 'M9MM9M',
+                'country'           => 'Canada',
+                'phone'             => '9999999', // Required
+                'phone2'            => '88888888',
+                'source'            => 'Radio',
+                'type'              => 'Client Type X',
+                'email'             => 'aaaaa@example.org',
+                'custmemo'          => 'Comment about anything',
+                'url'               => 'http://example.org',
+                'owner'             => '17',
             ]
         ]);
      *
      * @param int $id Comment item id
      *
      * @ApiDoc(
-     * description="Update Physical Store Order",
+     * description="Update Physical Store account",
      * resource=true
      * )
      * @AclAncestor("demacmedia_physicalstore_orders_update")
@@ -178,12 +165,22 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
      */
     public function putAction($id)
     {
-        return $this->handleUpdateRequest($id);
+        $entity = $this->getManager()->find($id);
+        if ($entity) {
+            if ($this->processForm($entity)) {
+                $view = $this->view($this->getManager()->getEntityViewModel($entity), Codes::HTTP_OK);
+            } else {
+                $view = $this->view($this->getForm(), Codes::HTTP_BAD_REQUEST);
+            }
+        } else {
+            $view = $this->view(null, Codes::HTTP_NOT_FOUND);
+        }
+        return $this->buildResponse($view, self::ACTION_UPDATE, ['id' => $id, 'entity' => $entity]);
     }
 
 
     /**
-     * Delete Physical Store Order
+     * Delete Physical Store account
      *
         // Example deleting Account with id: 1
         $response = $oroClient->delete('api/rest/latest/physicalstore/orders/1.json');
@@ -191,7 +188,7 @@ class PhysicalStoreRestOrdersController extends RestController implements ClassR
      * @param int $id comment id
      *
      * @ApiDoc(
-     *      description="Delete PhysicalStore order",
+     *      description="Delete PhysicalStore account",
      *      resource=true
      * )
      * @Acl(

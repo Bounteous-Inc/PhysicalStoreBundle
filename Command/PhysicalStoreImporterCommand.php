@@ -1,8 +1,8 @@
 <?php
 namespace DemacMedia\Bundle\PhysicalStoreBundle\Command;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 
 use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,12 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 use DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreAccounts;
 use DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrders;
 use DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrderItems;
 
 class PhysicalStoreImporterCommand extends ContainerAwareCommand
 {
+    const CSV_FOLDER = 'erp-integration-csvs/';
     const COMMAND_NAME = 'demacmedia:oro:physicalstore:import';
 
     protected $csvFile;
@@ -26,6 +30,7 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
     protected $entityManager;
     protected $progress;
     protected $lines;
+    protected $myLogger;
 
     /**
      * {@inheritdoc}
@@ -54,6 +59,9 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
                 '.csv file path is required',
                 'csv'
             );
+
+        $this->myLogger = new Logger('importError');
+        $this->myLogger->pushHandler(new StreamHandler(__DIR__.'/physicalstore-error.log', Logger::WARNING));
     }
 
     /**
@@ -100,7 +108,18 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
             while (($data = fgetcsv($handle)) !== FALSE) {
                 if (0 == $line) {
                     $header = $data;
+
+                    if (in_array('invdte', $header)) {
+                        $header = array_replace($header,
+                            array_fill_keys(
+                                array_keys($header, 'invdte'),
+                                'invdate'
+                            )
+                        );
+                    }
+
                     $header = array_flip($header);
+
                 } else {
 
                     if ($this->isAccountsParser($header)) {
@@ -160,7 +179,7 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         $arrayOrders = [
             'invno',
             'custno',
-            'invdte',
+            'invdate',
             'shipvia',
             'cshipno',
             'taxrate',
@@ -189,7 +208,7 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
             'qtyord',
             'qtyshp',
             'extprice',
-            'invdte'
+            'invdate'
         ];
 
         if (sizeof(array_diff(array_flip($header), $arrayOrderItems)) < 1 ) {
@@ -198,25 +217,46 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         return false;
     }
 
-
     protected function updateAccount($header, $data) {
         $entity = null;
         $update = false;
 
+        if (!$data[$header['contact']] && $data[$header['company']]) {
+            // If doesn't have contact but has company, assigns company as a contact name.
+            $data[$header['contact']] = $data[$header['company']];
+        }
+
+        $data[$header['city']] = (!$data[$header['city']])? 'null': $data[$header['city']];
+        $data[$header['contact']] = (!$data[$header['contact']])? 'null': $data[$header['contact']];
+        $data[$header['phone']] = (!$data[$header['phone']])? 'null': $data[$header['phone']];
+
+
         // Validating required fields
-        if (!$data[$header['custno']] ||
-            !$data[$header['contact']] ||
-            !$data[$header['city']] ||
-            !$data[$header['phone']]) {
+        if (!$data[$header['custno']]) {
+
+            $msgError = sprintf(
+                " [ACCOUNTS] - Required field missing. 'custno': [%s]",
+                $data[$header['custno']]
+            );
+
+            $this->myLogger->addWarning(
+                $msgError
+            );
+            echo $msgError. PHP_EOL;
 
             return false;
         }
 
         if ($data[$header['custno']] < 1) {
+            echo "\n----------------------------------------------> No custno < 1 \n";
             return false;
         }
 
         $data[$header['custno']] = is_numeric($data[$header['custno']])? (int) $data[$header['custno']]: $data[$header['custno']];
+
+        if ("web" === strtolower($data[$header['source']])){
+            return false;
+        }
 
         $physicalStoreAccounts = $this->getEntityManager()
             ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts')->findOneBy([
@@ -231,6 +271,10 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         }
 
         foreach($header as $key => $value) {
+            if (!isset($data[$value])) {
+                echo "\n---------------------------------------> No value on line on field {$value} \n";
+                return false;
+            }
             $csvValue = utf8_encode($data[$value]);
             if ($data[$value]) {
                 if (is_object($entity)){
@@ -262,6 +306,33 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         $update = false;
 
         if (!$data[$header['custno']] || !$data[$header['invno']]) {
+
+            $msgError = sprintf(
+                "[ORDERS] - Required field missing. 'custno': [%s] - 'invno': [%s] - REFNO: %s",
+                $data[$header['custno']],
+                $data[$header['invno']],
+                $data[$header['refno']]
+            );
+
+            $this->myLogger->addWarning(
+                $msgError
+            );
+            echo " " .$msgError. PHP_EOL;
+
+            return false;
+        }
+
+        $source = $this->getEntityManager()
+            ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts')->findOneBy([
+                'custno' => $data[$header['custno']]
+            ]);
+
+        if ($source !== null) {
+            if ("web" === $source->getSource()) {
+                $source = null;
+                return false;
+            }
+        } else {
             return false;
         }
 
@@ -282,6 +353,11 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         foreach($header as $key => $value) {
             $csvValue = utf8_encode($data[$value]);
             if ($data[$value]) {
+
+                if ($key == 'invdate') {
+                    $csvValue = \DateTime::createFromFormat('d/m/Y H:i A', $csvValue);
+                }
+
                 if (is_object($entity)){
                     $getValue = call_user_func([$entity, 'get' . ucwords($key)]);
                     if ($csvValue != $getValue) {
@@ -294,10 +370,9 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
             }
         }
 
-       // die($physicalStoreOrders->getInvdte());
 
         try {
-            if ($update == true && is_object($entity) || !$update && !is_object($entity)) {
+            if (($update == true && is_object($entity)) || (!$update && !is_object($entity))) {
                 $this->getEntityManager()->persist($physicalStoreOrders);
                 $this->getEntityManager()->flush();
                 $this->getEntityManager()->clear();
@@ -312,40 +387,66 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         $entity = null;
         $update = false;
 
-        if (!$data[$header['invno']]) {
+        if (!$data[$header['item']] || !$data[$header['invno']]) {
+            $msgError = sprintf(
+                "[ORDERS_ITEMS] - Required field missing. 'item': [%s] - 'invno': [%s] - ITEM: %s - DESCRIP: %s",
+                $data[$header['item']],
+                $data[$header['invno']],
+                $data[$header['item']],
+                $data[$header['descrip']]
+            );
+
+            $this->myLogger->addWarning(
+                $msgError
+            );
+            echo " " .$msgError. PHP_EOL;
+
             return false;
         }
 
-        if (preg_match_all('/\.000000/', $data[$header['invno']])) {
-            $data[$header['invno']] = (int) $data[$header['invno']];
+        $data[$header['invno']] = is_numeric($data[$header['invno']])? (int) $data[$header['invno']]: $data[$header['invno']];
+
+        $custno = $this->getCustnoFromInvno($data[$header['invno']]);
+
+        if ($custno) {
+            $data[$header['custno']] = $custno;
+        } else {
+            $msgError = sprintf(
+                "[ORDERS_ITEMS] - Sorry but no order with this invno: %s",
+                $data[$header['invno']]
+            );
+
+            $this->myLogger->addWarning(
+                $msgError
+            );
+            echo " " .$msgError. PHP_EOL;
+
+            return false;
         }
 
-        if (!$data[$header['custno']]) {
+        $query = $this->getContainer()->get('doctrine.orm.entity_manager')->createQuery("
+            SELECT
+                a.source
+            FROM DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders AS o
+                INNER JOIN DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts AS a WITH a.custno = o.custno
+            WHERE o.invno = :invno
+        ")->setParameter('invno', $data[$header['invno']]);
 
-            $custnoEntity = $this->getEntityManager()
-                ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders')->findOneBy([
-                    'invno'  => $data[$header['invno']]
-                ]);
+        $source = $query->getOneOrNullResult();
 
-            if ($custnoEntity) {
-                $data[$header['custno']] = $custnoEntity->getCustno();
-                die('achoU!');
-            }
-
-            $this->getEntityManager()->clear();
-
-            if (!$data[$header['custno']]) {
+        if (null !== $source) {
+            if ("web" === $source['source']) {
+                $source = null;
                 return false;
-            } else {
-                echo 'Customer Number: ' .PHP_EOL;
-                print_r($data);
-                die;
             }
+        } else {
+            return false;
         }
 
         $physicalStoreOrderItems = $this->getEntityManager()
             ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrderItems')->findOneBy([
-            'invno'  => $data[$header['invno']]
+            'invno'  => $data[$header['invno']],
+            'item'   => $data[$header['item']]
         ]);
 
         if (!$physicalStoreOrderItems) {
@@ -358,10 +459,10 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         foreach($header as $key => $value) {
             $csvValue = utf8_encode($data[$value]);
             if ($data[$value]) {
-                if (is_object($entity)){
+                if (is_object($entity)) {
                     $getValue = call_user_func([$entity, 'get' . ucwords($key)]);
                     if ($csvValue != $getValue) {
-                        if ('invdte' == $key) {
+                        if ('invdate' == $key) {
                             $csvValue = new \DateTime($data[$value], new \DateTimeZone('UTC'));
                         }
                         call_user_func([$physicalStoreOrderItems, 'set' . ucwords($key)], $csvValue);
@@ -384,6 +485,19 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
         }
     }
 
+    protected function getCustnoFromInvno($invno) {
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders')->findOneBy([
+                'invno'  => $invno
+            ]);
+
+        if (!$em) {
+            return false;
+        } else {
+            return $em->getCustno();
+        }
+    }
+
     protected function showDemacMediaHeader(OutputInterface $output) {
         $output->writeln('');
         $output->writeln('<demac>                                ');
@@ -395,7 +509,7 @@ class PhysicalStoreImporterCommand extends ContainerAwareCommand
     }
 
     protected function checkIfCsvExist($csvfile, OutputInterface $output) {
-        if (!is_readable($this->csvPath = $csvfile)){
+        if (!is_readable($this->csvPath = self::CSV_FOLDER . $csvfile)){
             $output->writeln('');
             $output->writeln('<error>        ERROR        </error>');
             $output->writeln(

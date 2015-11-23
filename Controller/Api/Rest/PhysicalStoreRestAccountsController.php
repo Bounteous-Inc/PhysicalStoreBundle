@@ -27,12 +27,12 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
     /**
      * REST GET list of PhysicalStore Accounts
      *
-        $response = $oroClient->get('api/rest/latest/physicalstore/accounts.json', [
-            'query' => [
-                'page' => 1,
-                'limit' => 5,
-            ]
-        ]);
+    $response = $oroClient->get('api/rest/latest/physicalstore/accounts.json', [
+    'query' => [
+    'page' => 1,
+    'limit' => 5,
+    ]
+    ]);
      *
      * @QueryParam(
      *      name="page",
@@ -64,8 +64,8 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
     /**
      * Get specific account data
      *
-        // Get a specific account using a id. In this example id=1
-        $physicalAccountsResponse = $oroClient->get('api/rest/latest/physicalstore/accounts/1.json', []);
+    // Get a specific account using a id. In this example id=1
+    $physicalAccountsResponse = $oroClient->get('api/rest/latest/physicalstore/accounts/1.json', []);
      * @param int $id Account id
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -87,29 +87,29 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
     /**
      * Create new PhysicalStore Account
      *
-        // Example creating a new Account.
-        $response = $oroClient->post('api/rest/latest/physicalstore/accounts.json', [
-            'body' => [
-                'custno'            => 'AAAAA', // Required
-                'company'           => 'Acme Company',
-                'contact'           => 'AAAAA AAAAA', // Required
-                'title'             => 'Dr.',
-                'address1'          => 'Street Foo, Bar, 1',
-                'address2'          => 'Street Foo2, Bar2, 2',
-                'city'              => 'My City', // Required
-                'addrstate'         => 'ON',
-                'zip'               => 'M9MM9M',
-                'country'           => 'Canada',
-                'phone'             => '9999999', // Required
-                'phone2'            => '88888888',
-                'source'            => 'Radio',
-                'type'              => 'Client Type X',
-                'email'             => 'aaaaa@example.org',
-                'custmemo'          => 'Comment about anything',
-                'url'               => 'http://example.org',
-                'salesrep'          => 'Sales Rep Name',
-            ]
-        ]);
+    // Example creating a new Account.
+    $response = $oroClient->post('api/rest/latest/physicalstore/accounts.json', [
+    'body' => [
+    'custno'            => 'AAAAA', // Required
+    'company'           => 'Acme Company',
+    'contact'           => 'AAAAA AAAAA', // Required
+    'title'             => 'Dr.',
+    'address1'          => 'Street Foo, Bar, 1',
+    'address2'          => 'Street Foo2, Bar2, 2',
+    'city'              => 'My City', // Required
+    'addrstate'         => 'ON',
+    'zip'               => 'M9MM9M',
+    'country'           => 'Canada',
+    'phone'             => '9999999', // Required
+    'phone2'            => '88888888',
+    'source'            => 'Radio',
+    'type'              => 'Client Type X',
+    'email'             => 'aaaaa@example.org',
+    'custmemo'          => 'Comment about anything',
+    'url'               => 'http://example.org',
+    'salesrep'          => 'Sales Rep Name',
+    ]
+    ]);
      *
      * @ApiDoc(
      * description="Create new Physical Store Account.",
@@ -127,28 +127,28 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
     /**
      * Update Physical Store account
      *
-        $request = $oroClient->put('api/rest/latest/physicalstore/accounts/6.json', [
-            'body' => [
-                'custno'            => 'AAAAA', // Required
-                'company'           => 'Acme Company',
-                'contact'           => 'AAAAA AAAAA', // Required
-                'title'             => 'Dr.',
-                'address1'          => 'Street Foo, Bar, 1',
-                'address2'          => 'Street Foo2, Bar2, 2',
-                'city'              => 'Toronto', // Required
-                'addrstate'         => 'ON',
-                'zip'               => 'M9MM9M',
-                'country'           => 'Canada',
-                'phone'             => '9999999', // Required
-                'phone2'            => '88888888',
-                'source'            => 'Radio',
-                'type'              => 'Client Type X',
-                'email'             => 'aaaaa@example.org',
-                'custmemo'          => 'Comment about anything',
-                'url'               => 'http://example.org',
-                'owner'             => '17',
-            ]
-        ]);
+    $request = $oroClient->put('api/rest/latest/physicalstore/accounts/6.json', [
+    'body' => [
+    'custno'            => 'AAAAA', // Required
+    'company'           => 'Acme Company',
+    'contact'           => 'AAAAA AAAAA', // Required
+    'title'             => 'Dr.',
+    'address1'          => 'Street Foo, Bar, 1',
+    'address2'          => 'Street Foo2, Bar2, 2',
+    'city'              => 'Toronto', // Required
+    'addrstate'         => 'ON',
+    'zip'               => 'M9MM9M',
+    'country'           => 'Canada',
+    'phone'             => '9999999', // Required
+    'phone2'            => '88888888',
+    'source'            => 'Radio',
+    'type'              => 'Client Type X',
+    'email'             => 'aaaaa@example.org',
+    'custmemo'          => 'Comment about anything',
+    'url'               => 'http://example.org',
+    'owner'             => '17',
+    ]
+    ]);
      *
      * @param int $id Comment item id
      *
@@ -169,8 +169,8 @@ class PhysicalStoreRestAccountsController extends RestController implements Clas
     /**
      * Delete Physical Store account
      *
-        // Example deleting Account with id: 1
-        $response = $oroClient->delete('api/rest/latest/physicalstore/accounts/1.json');
+    // Example deleting Account with id: 1
+    $response = $oroClient->delete('api/rest/latest/physicalstore/accounts/1.json');
      *
      * @param int $id comment id
      *

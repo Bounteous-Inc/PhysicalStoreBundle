@@ -1,15 +1,15 @@
 oro_menu_config:
    items:
        physicalstore_tab:
-           label: 'In-store purchases'
+           label: 'In-store'
            uri: '#'
- 
+
        shortcut_accounts_item:
-           label: 'In-store Accounts'
+           label: 'Accounts'
            route: demacmedia_physicalstore_accounts
 
        shortcut_orders_item:
-           label: 'In-store Orders'
+           label: 'Orders'
            route: demacmedia_physicalstore_orders
  
    tree:
@@ -19,3 +19,7 @@ oro_menu_config:
                    children:
                        shortcut_accounts_item: ~
                        shortcut_orders_item: ~
+
+oro_titles:
+    demacmedia_physicalstore_accounts:  ~
+    demacmedia_physicalstore_orders:    ~
