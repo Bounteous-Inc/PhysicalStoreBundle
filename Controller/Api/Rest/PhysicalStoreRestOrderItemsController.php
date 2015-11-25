@@ -26,12 +26,12 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
     /**
      * REST GET list of Physical Store OrderItems
      *
-            $physicalOrderItemsResponse = $oroClient->get('api/rest/latest/physicalstore/orderitems.json', [
-                'query' => [
-                    'page' => 1,
-                    'limit' => 5,
-                ]
-            ]);
+    $physicalOrderItemsResponse = $oroClient->get('api/rest/latest/physicalstore/orderitems.json', [
+    'query' => [
+    'page' => 1,
+    'limit' => 5,
+    ]
+    ]);
      *
      * @QueryParam(
      *      name="page",
@@ -63,8 +63,8 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
     /**
      * Get specific order items data
      *
-        // Get a specific order items using a id. In this example id=1
-        $physicalOrderItemsResponse = $oroClient->get('api/rest/latest/physicalstore/orderitems/1.json', []);
+    // Get a specific order items using a id. In this example id=1
+    $physicalOrderItemsResponse = $oroClient->get('api/rest/latest/physicalstore/orderitems/1.json', []);
      * @param int $id Account id
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -86,25 +86,25 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
     /**
      * Create new Physical Store Order Items
      *
-        // Example creating a new Order Items.
-        $response = $oroClient->post(
-                'api/rest/latest/physicalstore/orderitems.json', [
-                    'body' => [
-                    'invno'     => $csvLine['invno'], // Required
-                    'custno'    => $csvLine['custno'], // Required
-                    'item'      => $csvLine['item'],
-                    'descrip'   => $csvLine['descrip'],
-                    'taxrate'   => $csvLine['taxrate'],
-                    'cost'      => $csvLine['cost'],
-                    'price'     => $csvLine['price'],
-                    'qtyord'    => $csvLine['qtyord'],
-                    'qtyshp'    => $csvLine['qtyshp'],
-                    'extprice'  => $csvLine['extprice'],
-                    'invdate'   => $csvLine['invdate'],
-                    'ponum'     => $csvLine['ponum'],
-                ]
-            ]
-        );
+    // Example creating a new Order Items.
+    $response = $oroClient->post(
+    'api/rest/latest/physicalstore/orderitems.json', [
+    'body' => [
+    'invno'     => $csvLine['invno'], // Required
+    'custno'    => $csvLine['custno'], // Required
+    'item'      => $csvLine['item'],
+    'descrip'   => $csvLine['descrip'],
+    'taxrate'   => $csvLine['taxrate'],
+    'cost'      => $csvLine['cost'],
+    'price'     => $csvLine['price'],
+    'qtyord'    => $csvLine['qtyord'],
+    'qtyshp'    => $csvLine['qtyshp'],
+    'extprice'  => $csvLine['extprice'],
+    'invdate'   => $csvLine['invdate'],
+    'ponum'     => $csvLine['ponum'],
+    ]
+    ]
+    );
      *
      * @ApiDoc(
      * description="Create new Physical Store Order Items.",
@@ -141,8 +141,8 @@ class PhysicalStoreRestOrderItemsController extends RestController implements Cl
     /**
      * Delete Physical Store order items
      *
-        // Example deleting Order Items with id: 1
-        $response = $oroClient->delete('api/rest/latest/physicalstore/orderitems/1.json');
+    // Example deleting Order Items with id: 1
+    $response = $oroClient->delete('api/rest/latest/physicalstore/orderitems/1.json');
      *
      * @param int $id comment id
      *

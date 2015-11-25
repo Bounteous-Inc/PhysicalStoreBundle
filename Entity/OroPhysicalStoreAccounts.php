@@ -8,6 +8,9 @@ use Oro\Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+use OroCRM\Bundle\AccountBundle\Entity\Account;
+use OroCRM\Bundle\ContactBundle\Entity\Contact;
+
 
 /**
  * OroPhysicalStoreAccounts
@@ -93,18 +96,18 @@ class OroPhysicalStoreAccounts
     /**
      * @var string
      *
-     * @ORM\Column(name="contact", type="string")
+     * @ORM\Column(name="contactname", type="string")
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="Contact",
-     *              "plural_label"="Contacts",
-     *              "description"="Contact"
+     *              "label"="ContactName",
+     *              "plural_label"="Contacts Name",
+     *              "description"="Contact Name"
      *          }
      *      }
      * )
      */
-    protected $contact;
+    protected $contactname;
 
     /**
      * @var string
@@ -298,6 +301,24 @@ class OroPhysicalStoreAccounts
      */
     protected $email;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salesrep", type="string", nullable=true)
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="salesrep",
+     *              "plural_label"="salesrep",
+     *              "description"="salesrep"
+     *          }
+     *      }
+     * )
+     */
+    protected $salesrep;
+
+
     /**
      * @var string
      *
@@ -329,22 +350,6 @@ class OroPhysicalStoreAccounts
      * )
      */
     protected $url;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salesrep", type="string", length=32, nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="Sales Representative",
-     *              "plural_label"="Sales Representatives",
-     *              "description"="Sales Representative"
-     *          }
-     *      }
-     * )
-     */
-    protected $salesrep;
 
     /**
      * @var \DateTime
@@ -417,6 +422,42 @@ class OroPhysicalStoreAccounts
      */
     protected $organization;
 
+
+    /**
+     * @var Account
+     *
+     * @ORM\ManyToOne(targetEntity="OroCRM\Bundle\AccountBundle\Entity\Account")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "excluded"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $account;
+
+
+    /**
+     * @var Contact
+     *
+     * @ORM\ManyToOne(targetEntity="OroCRM\Bundle\ContactBundle\Entity\Contact")
+     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "excluded"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $contact;
+
+
+
+
+
     /**
      * @return int
      */
@@ -474,20 +515,40 @@ class OroPhysicalStoreAccounts
     /**
      * @return string
      */
-    public function getContact()
+    public function getContactname()
     {
-        return $this->contact;
+        return $this->contactname;
     }
 
     /**
-     * @param string $contact
+     * @param string $contactname
      */
-    public function setContact($contact)
+    public function setContactname($contactname)
     {
-        $this->contact = $contact;
+        $this->contactname = $contactname;
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getSalesrep()
+    {
+        return $this->salesrep;
+    }
+
+    /**
+     * @param string $salesrep
+     */
+    public function setSalesrep($salesrep)
+    {
+        $this->salesrep = $salesrep;
+
+        return $this;
+    }
+
+
 
     /**
      * @return string
@@ -742,22 +803,6 @@ class OroPhysicalStoreAccounts
     }
 
     /**
-     * @return string
-     */
-    public function getSalesrep()
-    {
-        return $this->salesrep;
-    }
-
-    /**
-     * @param string $salesrep
-     */
-    public function setSalesrep($salesrep)
-    {
-        $this->salesrep = $salesrep;
-    }
-
-    /**
      * Get created date
      *
      * @return \DateTime
@@ -851,6 +896,43 @@ class OroPhysicalStoreAccounts
         $this->organization = $organization;
 
         return $this;
+    }
+
+    /**
+     * @param Contact $contact
+     *
+     * @return OroPhysicalStoreAccounts
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+        return $this;
+    }
+
+    /**
+     * @return OroPhysicalStoreAccounts
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+    /**
+     * @param Account $account
+     *
+     * @return OroPhysicalStoreAccounts
+     */
+
+    public function setAccount($account)
+    {
+        $this->account = $account;
+        return $this;
+    }
+    /**
+     * @return OroPhysicalStoreAccounts
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 
     /**

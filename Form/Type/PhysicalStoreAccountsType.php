@@ -32,11 +32,11 @@ class PhysicalStoreAccountsType extends AbstractType
                 ]
             )
             ->add(
-                'contact',
+                'contactname',
                 'text',
                 [
                     'required'    => true,
-                    'label'       => 'Contact',
+                    'label'       => 'Contact Name',
                 ]
             )
             ->add(
@@ -100,7 +100,7 @@ class PhysicalStoreAccountsType extends AbstractType
                 'text',
                 [
                     'required'    => true,
-                    'label'       => 'Ohone',
+                    'label'       => 'Phone',
                 ]
             )
             ->add(
@@ -156,23 +156,7 @@ class PhysicalStoreAccountsType extends AbstractType
                 'text',
                 [
                     'required'    => false,
-                    'label'       => 'Salesrep',
-                ]
-            )
-            ->add(
-                'created',
-                'oro_datetime',
-                [
-                    'required'    => false,
-                    'label'       => 'Created At',
-                ]
-            )
-            ->add(
-                'updated',
-                'oro_datetime',
-                [
-                    'required'    => false,
-                    'label'       => 'Updated At',
+                    'label'       => 'Sales Representative',
                 ]
             );
     }

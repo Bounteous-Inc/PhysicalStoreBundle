@@ -3,6 +3,7 @@ parameters:
     demacmedia_physicalstore_orders.entity.class:           DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrders
     demacmedia_physicalstore_orderitems.entity.class:       DemacMedia\Bundle\PhysicalStoreBundle\Entity\OroPhysicalStoreOrderItems
     demacmedia_physicalstore.manager.api.class:             Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+    demacmedia_physicalstore.demac_assign_entity.action.class:    DemacMedia\Bundle\PhysicalStoreBundle\Model\Action\AssignEntity
 
 services:
     # ACCOUNTS
