@@ -12,6 +12,7 @@ datagrid:
                     - physicalstore_accounts.phone
                     - physicalstore_accounts.email
                     - physicalstore_accounts.updated
+                    - physicalstore_accounts.salesrep
                 from:
                     - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
         columns:
@@ -27,6 +28,8 @@ datagrid:
                 label: demacmedia_physicalstore.accounts.phone.label
             email:
                 label: demacmedia_physicalstore.accounts.email.label
+            salesrep:
+                label: demacmedia_physicalstore.accounts.salesrep.label
             updated:
                 label: demacmedia_physicalstore.accounts.updated.label
                 frontend_type:    datetime
@@ -39,6 +42,8 @@ datagrid:
                     data_name: physicalstore_accounts.city
                 contactname:
                     data_name: physicalstore_accounts.contactname
+                updated:
+                    data_name: physicalstore_accounts.updated
             default:
                 id: DESC
 
@@ -89,6 +94,9 @@ datagrid:
                             - 'is equal to'
                             - 'is empty'
                             - 'is not empty'
+                salesrep:
+                    type: string
+                    data_name: physicalstore_accounts.salesrep
                 updated:
                     type: datetime
                     data_name: physicalstore_accounts.updated
@@ -109,6 +117,7 @@ datagrid:
                     - physicalstore_orders.updated
                     - physicalstore_orders.invamt
                     - physicalstore_orders.taxrate
+                    - physicalstore_orders.salesrep
                 from:
                     - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders, alias: physicalstore_orders }
                 where:
@@ -134,6 +143,8 @@ datagrid:
                 frontend_type: datetime
             shipvia:
                 label: demacmedia_physicalstore.orders.shipvia.label
+            salesrep:
+                label: demacmedia_physicalstore.orders.salesrep.label
             updated:
                 label: demacmedia_physicalstore.orders.updated.label
                 frontend_type: datetime
@@ -198,25 +209,24 @@ datagrid:
                     - physicalstore_orders.invamt
                     - physicalstore_orders.taxrate
                     - physicalstore_accounts.contactname
+                    - physicalstore_accounts.salesrep
                 from:
                     - { table: DemacMediaPhysicalStoreBundle:OroPhysicalStoreOrders, alias: physicalstore_orders }
                 join:
-                    left:
+                    inner:
                         - { join: DemacMediaPhysicalStoreBundle:OroPhysicalStoreAccounts, alias: physicalstore_accounts }
                 where:
                     and:
                         - physicalstore_accounts.custno = physicalstore_orders.custno
 
         columns:
-            id:
-                label: demacmedia_physicalstore.orders.oroid.label
+            invno:
+                label: demacmedia_physicalstore.orders.invno.label
             invamt:
                 label: demacmedia_physicalstore.orders.invamt.label
                 frontend_type: currency
             taxrate:
                 label: demacmedia_physicalstore.orders.taxrate.label
-            invno:
-                label: demacmedia_physicalstore.orders.invno.label
             contactname:
                 label: demacmedia_physicalstore.accounts.contactname.label
             invdate:
@@ -224,6 +234,8 @@ datagrid:
                 frontend_type: datetime
             shipvia:
                 label: demacmedia_physicalstore.orders.shipvia.label
+            salesrep:
+                label: demacmedia_physicalstore.orders.salesrep.label
             updated:
                 label: demacmedia_physicalstore.orders.updated.label
                 frontend_type: datetime
@@ -269,6 +281,9 @@ datagrid:
                 shipvia:
                     type: string
                     data_name: physicalstore_orders.shipvia
+                salesrep:
+                    type: string
+                    data_name: physicalstore_accounts.salesrep
                 updated:
                     type: datetime
                     data_name: physicalstore_orders.updated

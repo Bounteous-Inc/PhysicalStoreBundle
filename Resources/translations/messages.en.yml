@@ -14,6 +14,7 @@ demacmedia_physicalstore:
         new:                  'New Account'
         updated.label:        'Updated'
         email.label:          'Email'
+        salesrep.label:       'Sales Representative'
 
     orders:
         entity.label:         'In-store Order'
@@ -30,6 +31,7 @@ demacmedia_physicalstore:
         oroid.label:          'ORO ID'
         invamt.label:         'Amount Paid'
         taxrate.label:        'Tax Rate'
+        salesrep.label:       'Sales Representative'
 
     order_items:
         entity.label:         'In-store Items'
@@ -57,3 +59,4 @@ demacmedia_physicalstore:
         invdate.label:        Invdate
         updated.label:        Updated
         created.label:        Created
+        salesrep.label:       'Sales Representative'
